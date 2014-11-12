@@ -9,8 +9,8 @@
  * where <server> is the IP/hostname of a server which hosts this project, and is accessible at /server-build/
  */
 
-require dirname(__DIR__) . '/includes/ansi-colours.php';
 require dirname(__DIR__) . '/includes/config.php';
+require dirname(__DIR__) . '/includes/ansi-colours.php';
 
 $cmds = [];
 if (empty($_REQUEST['hostname'])) {
