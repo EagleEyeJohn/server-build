@@ -20,7 +20,7 @@ if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $family . '/' 
     $cmds   = array_merge($cmds, require $path);
 }
 
-echo PHP_EOL . $COL_YELLOW . implode(PHP_EOL, $cmds) . $COL_RESET . PHP_EOL;
+echo PHP_EOL . $COL_YELLOW . implode(PHP_EOL, $cmds) . PHP_EOL . $COL_RESET . PHP_EOL;
 
 foreach ($cmds as $cmd) {
     passthru($cmd, $cc);
