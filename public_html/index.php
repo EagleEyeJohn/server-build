@@ -13,7 +13,8 @@ else {
     $cmds[] = 'cd /tmp';
     $cmds[] = 'rm -Rf server-build';
     $cmds[] = 'git clone https://' . GITHUB_TOKEN . ':x-oauth-basic@github.com/EagleEyeJohn/server-build.git';
-    $cmds[] = 'echo "Hi ho! Hi ho, it\'s off to work we go! ('. $hostname . ')"';
+
+    $cmds[] = 'echo "Hi ho! Hi ho! It\'s off to work we go! ('. $hostname . ')"';
 }
 
 echo implode(PHP_EOL, $cmds) . PHP_EOL;
