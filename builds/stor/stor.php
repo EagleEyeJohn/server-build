@@ -9,6 +9,7 @@ return [
     /** Apache and PHP 5.4+ **/
     'yum install httpd php -y',
     'cd /var/www',
+    'rm -Rf server-build',
     $git_clone,
-    'php ' . dirname(dirname(__DIR__)).'/create/vhost/'.basename(__FILE__) . ' "' . $hostname . '"'
+    'php ' . dirname(dirname(__DIR__)) . '/create/vhost/' . basename(__FILE__) . ' "' . $hostname . '"'
 ];
