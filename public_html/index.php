@@ -7,7 +7,7 @@ if (empty($_REQUEST['hostname'])) {
 }
 else {
     $hostname = $_REQUEST['hostname'];
-    $machine  = explode('.', $_REQUEST['hostname'])[0];
+    $machine  = explode('.', $hostname)[0];
 
     // do the absolute minimum here (as this script could get out of date on curl'd to server)
     $cmds[] = 'yum update -y';
@@ -25,4 +25,4 @@ else {
     }
 }
 
-echo implode(PHP_EOL, $cmds) . PHP_EOL;
+#echo implode(PHP_EOL, $cmds) . PHP_EOL;
