@@ -1,5 +1,7 @@
 <?php
-$port     = 80;
+$port = 80;
+
+/** @var string $machine */
 
 $vhost = <<<VHOST
 <VirtualHost *:$port>
@@ -10,4 +12,4 @@ $vhost = <<<VHOST
 </VirtualHost>
 VHOST;
 
-file_put_contents('/etc/httpd/conf.d/vhost-' . strtolower($machine), $vhost);
+file_put_contents('/etc/httpd/conf.d/vhost-' . strtolower($machine) . '.conf', $vhost);
