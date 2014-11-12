@@ -11,5 +11,5 @@ return [
     'cd /var/www',
     'rm -Rf server-build',
     $git_clone,
-    'php ' . dirname(dirname(__DIR__)) . '/create/vhost/' . basename(__FILE__) . ' "' . $hostname . '"'
+    'php ' . dirname(__DIR__) . '/create/vhost/' . basename(__FILE__) . ' "' . $hostname . '"'
 ];
