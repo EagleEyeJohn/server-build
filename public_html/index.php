@@ -8,11 +8,9 @@
  *
  * where <server> is the IP/hostname of a server which hosts this project, and is accessible at /server-build/
  */
-define('GITHUB_TOKEN', '78abce1f77af5e238a613653eab1b60d7787dbc2');
 
 require dirname(__DIR__) . '/includes/ansi-colours.php';
-
-$git_clone = 'git clone https://' . GITHUB_TOKEN . ':x-oauth-basic@github.com/EagleEyeJohn/server-build.git';
+require dirname(__DIR__) . '/includes/config.php';
 
 $cmds = [];
 if (empty($_REQUEST['hostname'])) {
@@ -23,14 +21,14 @@ else {
     $machine  = explode('.', $hostname)[0];
     $family   = substr($machine, 0, 4);
 
-    // do the absolute minimum here (as this script could get out of date on curl'd to server)
+    // do the absolute minimum here (as this script could easily get out of date on curl'd to server)
     $cmds[] = 'yum update -y';
     $cmds[] = 'yum install git vim -y';
     $cmds[] = 'cd /tmp';
     $cmds[] = 'rm -Rf server-build';
 
     // the target machine gets the absolute latest version of code
-    $cmds[] = $git_clone;
+    $cmds[] = GITHUB_CLONE;
 
     $cmds[] = 'echo -e "' . $COL_BLACK . $COL_BG_CYAN . 'Hi ho! Hi ho! It\'s off to work we go! (' . $hostname . ')' . $COL_RESET . '"';
 

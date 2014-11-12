@@ -1,7 +1,5 @@
 <?php
 $port     = 80;
-$hostname = $argv[1];
-$machine  = explode('.', $hostname)[0];
 
 $vhost = <<<VHOST
 <VirtualHost *:$port>
