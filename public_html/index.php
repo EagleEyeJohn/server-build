@@ -7,14 +7,22 @@ if (empty($_REQUEST['hostname'])) {
 }
 else {
     $hostname = $_REQUEST['hostname'];
+    $machine  = explode('.', $_REQUEST['hostname'])[0];
 
+    // do the absolute minimum here (as this script could get out of date on curl'd to server)
     $cmds[] = 'yum update -y';
-    $cmds[] = 'yum install git net-tools -y';
+    $cmds[] = 'yum install git -y';
     $cmds[] = 'cd /tmp';
     $cmds[] = 'rm -Rf server-build';
+
+    // the target machine gets the absolute latest version of code
     $cmds[] = 'git clone https://' . GITHUB_TOKEN . ':x-oauth-basic@github.com/EagleEyeJohn/server-build.git';
 
-    $cmds[] = 'echo "Hi ho! Hi ho! It\'s off to work we go! ('. $hostname . ')"';
+    $cmds[] = 'echo "Hi ho! Hi ho! It\'s off to work we go! (' . $hostname . ')"';
+
+    if (file_exists($path = dirname(__DIR__) . '/builds/' . $machine . '.php')) {
+        array_merge($cmds, require $path);
+    }
 }
 
 echo implode(PHP_EOL, $cmds) . PHP_EOL;
