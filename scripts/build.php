@@ -10,13 +10,13 @@ if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $family . '/' 
     $cmds[] = 'echo "Config from ' . $build . ' loaded"';
     $cmds   = array_merge($cmds, require $path);
 }
-$cmds[] = 'echo "Config from ' . $build . ' loaded"';
+$cmds[] = 'echo "Config from ' . $path . ' loaded"';
 
 // Load commands to build settings that are specific to the server which invoked this script
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $family . '/' . $machine . '.php'))) {
     $cmds[] = 'echo "Config from ' . $build . ' loaded"';
     $cmds   = array_merge($cmds, require $path);
 }
-$cmds[] = 'echo "Config from ' . $build . ' loaded"';
+$cmds[] = 'echo "Config from ' . $path . ' loaded"';
 
 print_r($cmds);
