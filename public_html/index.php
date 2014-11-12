@@ -44,7 +44,7 @@ else {
 
     // do the absolute minimum here (as this script could get out of date on curl'd to server)
     $cmds[] = 'yum update -y';
-    $cmds[] = 'yum install git -y';
+    $cmds[] = 'yum install git vim -y';
     $cmds[] = 'cd /tmp';
     $cmds[] = 'rm -Rf server-build';
 
