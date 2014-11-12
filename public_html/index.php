@@ -22,14 +22,14 @@ else {
     $cmds[] = 'echo "Hi ho! Hi ho! It\'s off to work we go! (' . $hostname . ')"';
 
     if (file_exists($path = dirname(__DIR__) . '/builds/' . $family . '/' . $family . '.php')) {
-        array_merge($cmds, require $path);
+        $cmds[] = 'echo "Config from "' . $path . '" loaded';
+        $cmds = array_merge($cmds, require $path);
     }
-    $cmds[] = 'echo "' . $path . '"';
 
     if (file_exists($path = dirname(__DIR__) . '/builds/' . $family . '/' . $machine . '.php')) {
-        array_merge($cmds, require $path);
+        $cmds[] = 'echo "Config from "' . $path . '" loaded';
+        $cmds = array_merge($cmds, require $path);
     }
-    $cmds[] = 'echo "' . $path . '"';
 }
 
 echo implode(PHP_EOL, $cmds) . PHP_EOL;
