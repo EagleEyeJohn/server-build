@@ -1,4 +1,13 @@
 <?php
+/**
+ * This is a bootstrap to enable the scripted build of a VM
+ *
+ * from the empty CentOS VM, when logged in as root, issue the following command to begin the build
+ *
+ *      curl <server>/server-build/ | sh           e.g. curl 10.72.4.27/server-build/ | sh
+ *
+ * where <server> is the IP/hostname of a server which hosts this project, and is accessible at /server-build/
+ */
 define('GITHUB_TOKEN', '78abce1f77af5e238a613653eab1b60d7787dbc2');
 
 $cmds = [];
@@ -21,11 +30,13 @@ else {
 
     $cmds[] = 'echo "Hi ho! Hi ho! It\'s off to work we go! (' . $hostname . ')"';
 
+    // Load commands to build settings that are common to all servers in this family
     if (file_exists($path = dirname(__DIR__) . '/builds/' . $family . '/' . $family . '.php')) {
         $cmds[] = 'echo "Config from "' . $path . '" loaded';
         $cmds = array_merge($cmds, require $path);
     }
 
+    // Load commands to build settings that are specific to the server which invoked this script
     if (file_exists($path = dirname(__DIR__) . '/builds/' . $family . '/' . $machine . '.php')) {
         $cmds[] = 'echo "Config from "' . $path . '" loaded';
         $cmds = array_merge($cmds, require $path);
