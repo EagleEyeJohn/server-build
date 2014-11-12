@@ -10,5 +10,5 @@ return [
     'yum install httpd php -y',
     'cd /var/www',
     $git_clone,
-    'php ' . dirname(dirname(__DIR__)).'/create/vhost'.basename(__FILE__) . ' "' . $hostname . '"'
+    'php ' . dirname(dirname(__DIR__)).'/create/vhost/'.basename(__FILE__) . ' "' . $hostname . '"'
 ];
