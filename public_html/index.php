@@ -8,6 +8,7 @@ if (empty($_REQUEST['hostname'])) {
 else {
     $hostname = $_REQUEST['hostname'];
     $machine  = explode('.', $hostname)[0];
+    $family   = substr($machine, 0, 4);
 
     // do the absolute minimum here (as this script could get out of date on curl'd to server)
     $cmds[] = 'yum update -y';
@@ -20,9 +21,13 @@ else {
 
     $cmds[] = 'echo "Hi ho! Hi ho! It\'s off to work we go! (' . $hostname . ')"';
 
-    if (file_exists($path = dirname(__DIR__) . '/builds/' . $machine . '.php')) {
+    if (file_exists($path = dirname(__DIR__) . '/builds/' . $family . '/' . $family . '.php')) {
+        array_merge($cmds, require $path);
+    }
+
+    if (file_exists($path = dirname(__DIR__) . '/builds/' . $family . '/' . $machine . '.php')) {
         array_merge($cmds, require $path);
     }
 }
 
-#echo implode(PHP_EOL, $cmds) . PHP_EOL;
+echo implode(PHP_EOL, $cmds) . PHP_EOL;
