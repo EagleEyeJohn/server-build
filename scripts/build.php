@@ -1,5 +1,5 @@
 <?php
-$hostname = php_uname();
+$hostname = php_uname('n');
 $machine  = explode('.', $hostname)[0];
 $family   = substr($machine, 0, 4);
 
