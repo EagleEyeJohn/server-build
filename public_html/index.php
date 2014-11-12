@@ -10,7 +10,7 @@
  */
 define('GITHUB_TOKEN', '78abce1f77af5e238a613653eab1b60d7787dbc2');
 
-require dirname(__DIR__) . 'includes/ansi-colours.php';
+require dirname(__DIR__) . '/includes/ansi-colours.php';
 
 $git_clone = 'git clone https://' . GITHUB_TOKEN . ':x-oauth-basic@github.com/EagleEyeJohn/server-build.git';
 
