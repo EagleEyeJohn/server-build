@@ -31,6 +31,8 @@ $COL_BG_WHITE   = "\x1b[47;01m";
 
 $COL_RESET = "\x1b[39;49;00m";
 
+$git_clone = 'git clone https://' . GITHUB_TOKEN . ':x-oauth-basic@github.com/EagleEyeJohn/server-build.git';
+
 $cmds = [];
 if (empty($_REQUEST['hostname'])) {
     $cmds[] = 'curl ' . $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'])[0] . '?hostname={`hostname`}|sh';
@@ -47,7 +49,7 @@ else {
     $cmds[] = 'rm -Rf server-build';
 
     // the target machine gets the absolute latest version of code
-    $cmds[] = 'git clone https://' . GITHUB_TOKEN . ':x-oauth-basic@github.com/EagleEyeJohn/server-build.git';
+    $cmds[] = $git_clone;
 
     $cmds[] = 'echo -e "' . $COL_BLACK . $COL_BG_CYAN . 'Hi ho! Hi ho! It\'s off to work we go! (' . $hostname . ')' . $COL_RESET . '"';
 
