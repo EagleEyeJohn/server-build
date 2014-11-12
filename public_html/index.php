@@ -34,7 +34,7 @@ else {
 
     $cmds[] = 'echo -e "' . $COL_BLACK . $COL_BG_CYAN . 'Hi ho! Hi ho! It\'s off to work we go! (' . $hostname . ')' . $COL_RESET . '"';
 
-    $cmds[] = 'php ' . dirname(__DIR__) . '/scripts/build.php';
+    $cmds[] = 'php /tmp/server-build/scripts/build.php';
 }
 
 echo implode(PHP_EOL, $cmds) . PHP_EOL;
