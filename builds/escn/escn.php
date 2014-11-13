@@ -5,9 +5,15 @@
 
 require dirname(dirname(__DIR__)) . '/create/repo/' . basename(__FILE__);  // create the repo
 
-passthru('rm -f /etc/elasticsearch/elasticsearch.yml*', $cc);   // in case we get any .rpmnew issues on upgrade
-
-passthru('yum install elasticsearch -y', $cc);
+if (is_dir('/etc/elasticsearch/')) {
+    if (file_exists('/etc/elasticsearch/elasticsearch.yml')) {
+        passthru('rm -f /etc/elasticsearch/elasticsearch.yml*', $cc);   // in case we get any .rpmnew issues on upgrade
+        passthru('yum reinstall elasticsearch -y', $cc);
+    }
+    else {
+        passthru('yum install elasticsearch -y', $cc);
+    }
+}
 
 $replace = [
     '/^#cluster.name: elasticsearch/im' => 'cluster.name: es-' . $tier,
