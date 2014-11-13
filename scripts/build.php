@@ -16,6 +16,7 @@ if (!$hostinfo = parseHostname($hostname)) {
 
 // Load commands to build settings that are common to all servers in this family
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['family'] . '/' . $hostinfo['family'] . '.php'))) {
+    $cmds = [];
     $cmds[] = '# Config from "' . $build . '" loaded';
     $cmds   = array_merge($cmds, require $path);
     runCommands($cmds);
@@ -23,7 +24,14 @@ if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['fam
 
 // Load commands to build settings that are specific to the server which invoked this script
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['family'] . '/' . $hostinfo['machine'] . '.php'))) {
+    $cmds = [];
     $cmds[] = '# Config from "' . $build . '" loaded';
     $cmds   = array_merge($cmds, require $path);
     runCommands($cmds);
 }
+
+$cmds = [
+    'hostname',
+    'ip addr|grep -P "[\d.]{10,}"',
+];
+runCommands($cmds);
