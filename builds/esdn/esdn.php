@@ -33,5 +33,7 @@ return [
     'systemctl enable elasticsearch service',
     'service elasticsearch start',
     'sleep 10',
-    'curl localhost:9200/_cat/health'
+    'curl localhost:9200/_cat/health',
+    'curl localhost:9200/_upgrade',             //TODO: needs to be the loadbalancer, not localhost
+    'curl -XPOST localhost:9200/_upgrade',      //TODO: needs to be the loadbalancer, not localhost
 ];
