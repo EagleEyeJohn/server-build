@@ -1,6 +1,6 @@
 <?php
 /**
- * An array of commands which are required for to all servers in the 'escn' family (Elasticsearch CLIENT node)
+ * An array of commands which are required for to all servers in the 'esdn' family (Elasticsearch DATA node)
  */
 
 require dirname(dirname(__DIR__)) . '/create/repo/' . basename(__FILE__);  // create the repo
@@ -11,8 +11,8 @@ passthru('yum install elasticsearch -y', $cc);
 
 $replace = [
     '/^#cluster.name: elasticsearch/im' => 'cluster.name: es-' . $tier,
-    '/^#node.master:.+$/im'           => 'node.master: false',
-    '/^#node.data:.+$/im'             => 'node.data: false',
+    '/^#node.master:.+$/im'           => 'node.master: true',
+    '/^#node.data:.+$/im'             => 'node.data: true',
     '/^#node.name:.+$/im'             => 'node.name: ' . $hostname,
 ];
 
