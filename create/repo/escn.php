@@ -1,6 +1,4 @@
 <?php
-/** @var string $machine */
-
 $repo = <<<REPO
 [elasticsearch-1.4]
 name=Elasticsearch repository for 1.4.x packages
