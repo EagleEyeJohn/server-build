@@ -32,7 +32,7 @@ else {
     // the target machine gets the absolute latest version of code
     $cmds[] = GITHUB_CLONE;
 
-    $cmds[] = 'echo -e "' . COL_BLACK . COL_BG_CYAN . 'Hi ho! Hi ho! It\'s off to work we go! (' . $hostinfo['hostname'] . ')' . COL_RESET . '"';
+    $cmds[] = 'echo -e "\n' . COL_BLACK . COL_BG_CYAN . 'Hi ho! Hi ho! It\'s off to work we go! (' . $hostinfo['hostname'] . ')' . COL_RESET . '"';
 
     $cmds[] = 'php /tmp/server-build/scripts/build.php';
 }
