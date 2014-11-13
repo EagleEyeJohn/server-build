@@ -8,14 +8,11 @@ require dirname(__DIR__) . '/includes/utils.php';
 
 $hostname = php_uname('n');
 
-if (!$hostinfo = parseHostname($_REQUEST['hostname'])) {
-    $cmd = 'echo -e "' . COL_BLACK . COL_BG_RED . 'Hostname "' . $_REQUEST['hostname'] . '" must be of format AAAANNNN.tier.domain, e.g. http1001.dev.localdomain' . COL_RESET . '"';
+if (!$hostinfo = parseHostname($hostname)) {
+    $cmd = 'echo -e "' . COL_BLACK . COL_BG_RED . 'Hostname "' . $hostname . '" must be of format AAAANNNN.tier.domain, e.g. http1001.dev.localdomain' . COL_RESET . '"';
     passthru($cmd, $cc);
     exit;
 }
-
-print_r($hostinfo);
-exit;
 
 // Load commands to build settings that are common to all servers in this family
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['family'] . '/' . $hostinfo['family'] . '.php'))) {

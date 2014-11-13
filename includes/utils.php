@@ -34,3 +34,5 @@ function runCommands(array $cmds)
         passthru($cmd, $cc);
     }
 }
+
+#print_r(parseHostname('escn0000.dev.localdomain'));
