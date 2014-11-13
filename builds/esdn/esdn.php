@@ -5,15 +5,17 @@
 
 require dirname(dirname(__DIR__)) . '/create/repo/' . basename(__FILE__);  // create the repo
 
+passthru('yum install java -y', $cc);
+
 passthru('rm -f /etc/elasticsearch/elasticsearch.yml*', $cc);   // in case we get any .rpmnew issues on upgrade
 passthru('yum remove elasticsearch -y', $cc);
 passthru('yum install elasticsearch -y', $cc);
 
 $replace = [
     '/^#cluster.name: elasticsearch/im' => 'cluster.name: es-' . $tier,
-    '/^#node.master:.+$/im'           => 'node.master: true',
-    '/^#node.data:.+$/im'             => 'node.data: true',
-    '/^#node.name:.+$/im'             => 'node.name: ' . $hostname,
+    '/^#node.master:.+$/im'             => 'node.master: true',
+    '/^#node.data:.+$/im'               => 'node.data: true',
+    '/^#node.name:.+$/im'               => 'node.name: ' . $hostname,
 ];
 
 $str = file_get_contents($file = '/etc/elasticsearch/elasticsearch.yml');
