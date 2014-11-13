@@ -9,7 +9,7 @@ runCommands(
     [
         'service firewalld stop',
         'yum install httpd -y',
-        'yum install php -y',
+        'yum install php php-pecl-amqp php-pecl-ssh2 -y',
     ]
 );
 
