@@ -18,7 +18,7 @@ runCommands(
 $replace = [
     '/^#(cluster.name:).+$/im'                       => '$1 es-' . $tier,
     '/^#(node.master:).+$/im'                        => '$1 true',
-    '/^#(node.data:.+$/im'                           => '$1 true',
+    '/^#(node.data:).+$/im'                          => '$1 true',
     '/^#(node.name:).+$/im'                          => '$1 ' . $hostname,
     '/^#(index.number_of_shards:).+$/im'             => '$1 2',
     '/^#(index.number_of_replicas:).+$/im'           => '$1 2',
