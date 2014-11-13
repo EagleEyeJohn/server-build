@@ -16,10 +16,13 @@ runCommands(
 );
 
 $replace = [
-    '/^#cluster.name: elasticsearch/im' => 'cluster.name: es-' . $tier,
-    '/^#node.master:.+$/im'             => 'node.master: false',
-    '/^#node.data:.+$/im'               => 'node.data: false',
-    '/^#node.name:.+$/im'               => 'node.name: ' . $hostname,
+    '/^#(cluster.name:).+$/im'                       => '$1 es-' . $tier,
+    '/^#(node.master:).+$/im'                        => '$1 true',
+    '/^#(node.data:.+$/im'                           => '$1 true',
+    '/^#(node.name:).+$/im'                          => '$1 ' . $hostname,
+    '/^#(index.number_of_shards:).+$/im'             => '$1 2',
+    '/^#(index.number_of_replicas:).+$/im'           => '$1 2',
+    '/^#(discovery.zen.minimum_master_nodes:).+$/im' => '$1 2',
 ];
 
 $str = file_get_contents($file = '/etc/elasticsearch/elasticsearch.yml');
@@ -33,5 +36,5 @@ return [
     'systemctl enable elasticsearch.service',
     'service elasticsearch start',
     'sleep 10',
-    'curl localhost:9200/_cat/health'
+    'curl localhost:9200/_cat/health',
 ];

@@ -16,10 +16,13 @@ runCommands(
 );
 
 $replace = [
-    '/^#cluster.name: elasticsearch/im' => 'cluster.name: es-' . $tier,
-    '/^#node.master:.+$/im'             => 'node.master: true',
-    '/^#node.data:.+$/im'               => 'node.data: true',
-    '/^#node.name:.+$/im'               => 'node.name: ' . $hostname,
+    '/^#(cluster.name:).+$/im'                       => '$1 es-' . $tier,
+    '/^#(node.master:).+$/im'                        => '$1 true',
+    '/^#(node.data:.+$/im'                           => '$1 true',
+    '/^#(node.name:).+$/im'                          => '$1 ' . $hostname,
+    '/^#(index.number_of_shards:).+$/im'             => '$1 2',
+    '/^#(index.number_of_replicas:).+$/im'           => '$1 2',
+    '/^#(discovery.zen.minimum_master_nodes:).+$/im' => '$1 2',
 ];
 
 $str = file_get_contents($file = '/etc/elasticsearch/elasticsearch.yml');
