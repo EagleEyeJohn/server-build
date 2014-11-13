@@ -10,7 +10,7 @@ function runCommands($cmds) {
     global $COL_YELLOW, $COL_RESET;
 
     foreach ($cmds as $cmd) {
-        echo PHP_EOL . $COL_YELLOW . $cmd . PHP_EOL . $COL_RESET;
+        echo PHP_EOL . $COL_YELLOW . $cmd . PHP_EOL . $COL_RESET . PHP_EOL;
         passthru($cmd, $cc);
     }
 }
