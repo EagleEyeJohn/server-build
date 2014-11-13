@@ -25,9 +25,9 @@ else {
 
     // do the absolute minimum here (as this script could easily get out of date on curl'd to server)
     $cmds[] = 'yum update -y';
-    $cmds[] = 'yum install git vim php -y';
+    $cmds[] = 'yum install git vim php open-vm-tools -y';
     $cmds[] = 'cd /tmp';
-    $cmds[] = 'rm -Rf server-build';
+    $cmds[] = 'rm -Rf server-build';    // so we can git clone AGAIN without issue if need be (e.g re-running this)
 
     // the target machine gets the absolute latest version of code
     $cmds[] = GITHUB_CLONE;

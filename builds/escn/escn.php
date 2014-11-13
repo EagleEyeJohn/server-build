@@ -18,8 +18,8 @@ runCommands(
 
 $replace = [
     '/^#(cluster.name:).+$/im'                       => '$1 es-' . $hostinfo['tier'] . '-'. $hostinfo['clusterno'],
-    '/^#(node.master:).+$/im'                        => '$1 true',
-    '/^#(node.data:).+$/im'                          => '$1 true',
+    '/^#(node.master:).+$/im'                        => '$1 false',
+    '/^#(node.data:).+$/im'                          => '$1 false',
     '/^#(node.name:).+$/im'                          => '$1 ' . $hostinfo['hostname'],
     '/^#(index.number_of_shards:).+$/im'             => '$1 2',
     '/^#(index.number_of_replicas:).+$/im'           => '$1 2',
