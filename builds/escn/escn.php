@@ -13,7 +13,7 @@ $replace = [
     '/^#cluster.name: elasticsearch/im' => 'cluster.name: es-' . $tier,
     '/^#node.master:.+$/im'           => 'node.master: false',
     '/^#node.data:.+$/im'             => 'node.master: false',
-    '/^#node.name:.+$/im'             => 'node.name: ' . $machine,
+    '/^#node.name:.+$/im'             => 'node.name: ' . $hostname,
 ];
 
 $str = file_get_contents($file = '/etc/elasticsearch/elasticsearch.yml');
@@ -23,7 +23,9 @@ foreach ($replace as $from => $to) {
 file_put_contents($file, $str);
 
 return [
-#    'systemctl daemon-reload',
-#    'systemctl enable elasticsearch service',
-#    'service elasticsearch start'
+    'systemctl daemon-reload',
+    'systemctl enable elasticsearch service',
+    'service elasticsearch start',
+    'sleep 10',
+    'curl localhost:9200/_cat/health'
 ];
