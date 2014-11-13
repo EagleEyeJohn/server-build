@@ -6,30 +6,25 @@ $hostname = php_uname('n');
 $machine  = explode('.', $hostname)[0];
 $family   = substr($machine, 0, 4);
 
-$cmds = [];
+function runCommands($cmds) {
+    global $COL_YELLOW, $COL_RESET;
+
+    foreach ($cmds as $cmd) {
+        echo PHP_EOL . $COL_YELLOW . $cmd . PHP_EOL . $COL_RESET;
+        passthru($cmd, $cc);
+    }
+}
 
 // Load commands to build settings that are common to all servers in this family
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $family . '/' . $family . '.php'))) {
     $cmds[] = '# Config from "' . $build . '" loaded';
     $cmds   = array_merge($cmds, require $path);
+    runCommands($cmds);
 }
-
-foreach ($cmds as $cmd) {
-    passthru($cmd, $cc);
-}
-
-echo PHP_EOL . $COL_YELLOW . implode(PHP_EOL, $cmds) . PHP_EOL . $COL_RESET . PHP_EOL;
-
-$cmds = [];
 
 // Load commands to build settings that are specific to the server which invoked this script
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $family . '/' . $machine . '.php'))) {
     $cmds[] = '# Config from "' . $build . '" loaded';
     $cmds   = array_merge($cmds, require $path);
-}
-
-echo PHP_EOL . $COL_YELLOW . implode(PHP_EOL, $cmds) . PHP_EOL . $COL_RESET . PHP_EOL;
-
-foreach ($cmds as $cmd) {
-    passthru($cmd, $cc);
+    runCommands($cmds);
 }
