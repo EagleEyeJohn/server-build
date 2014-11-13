@@ -10,9 +10,9 @@ passthru('rm -f /etc/elasticsearch/elasticsearch.yml*', $cc);   // in case we ge
 passthru('yum install elasticsearch -y', $cc);
 
 $replace = [
-    '^#cluster.name: elasticsearch' => 'cluster.name: es-' . $tier,
-    '^#node.master: true' => 'node.master: false',
-    '^#node.data: true' => 'node.master: false',
+    '/^#cluster.name: elasticsearch/im' => 'cluster.name: es-' . $tier,
+    '/^#node.master: true/im' => 'node.master: false',
+    '/^#node.data: true/im' => 'node.master: false',
 ];
 
 $str = file_get_contents($file = '/etc/elasticsearch/elasticsearch.yml');
