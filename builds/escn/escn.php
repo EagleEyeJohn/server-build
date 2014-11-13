@@ -1,6 +1,6 @@
 <?php
 /**
- * An array of commands which are required for to all servers in the 'stor' family
+ * An array of commands which are required for to all servers in the 'escn' family (Elasticsearch CLIENT node)
  */
 
 require dirname(dirname(__DIR__)) . '/create/repo/' . basename(__FILE__);  // create the repo
@@ -10,10 +10,15 @@ passthru('rm -f /etc/elasticsearch/elasticsearch.yml*', $cc);   // in case we ge
 passthru('yum install elasticsearch -y', $cc);
 
 $replace = [
+    '^#cluster.name: elasticsearch' => 'cluster.name: es-' . $tier,
+    '^#node.master: true' => 'node.master: false',
+    '^#node.data: true' => 'node.master: false',
 ];
 
 $str = file_get_contents($file = '/etc/elasticsearch/elasticsearch.yml');
-$str = str_replace(array_keys($replace), $replace, $str);
+foreach($replace as $from=>$to) {
+    $str = preg_replace($from, $to, $str, 1);   // only replace first occurrence
+}
 file_put_contents($file, $str);
 
 return [
