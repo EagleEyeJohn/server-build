@@ -14,6 +14,14 @@ if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $family . '/' 
     $cmds   = array_merge($cmds, require $path);
 }
 
+foreach ($cmds as $cmd) {
+    passthru($cmd, $cc);
+}
+
+echo PHP_EOL . $COL_YELLOW . implode(PHP_EOL, $cmds) . PHP_EOL . $COL_RESET . PHP_EOL;
+
+$cmds = [];
+
 // Load commands to build settings that are specific to the server which invoked this script
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $family . '/' . $machine . '.php'))) {
     $cmds[] = '# Config from "' . $build . '" loaded';
