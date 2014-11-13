@@ -68,3 +68,6 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 REPO;
 
 file_put_contents('/etc/yum.repos.d/remi.repo', $repo);
+
+copy('http://rpms.famillecollet.com/RPM-GPG-KEY-remi', '/etc/pki/rpm-gpg/RPM-GPG-KEY-remi');
+
