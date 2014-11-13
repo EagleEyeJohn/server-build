@@ -7,6 +7,7 @@ require dirname(dirname(__DIR__)) . '/create/repo/' . basename(__FILE__);  // cr
 
 runCommands(
     [
+        'service firewalld stop',
         'yum install java -y',
         'service elasticsearch stop',                      // in case it's installed & running already
         'rm -f /etc/elasticsearch/elasticsearch.yml*',     // in case we get any .rpmnew issues on upgrade
@@ -16,10 +17,10 @@ runCommands(
 );
 
 $replace = [
-    '/^#(cluster.name:).+$/im'                       => '$1 es-' . $tier,
+    '/^#(cluster.name:).+$/im'                       => '$1 es-' . $hostinfo['tier'] . '-'. $hostinfo['clusterno'],
     '/^#(node.master:).+$/im'                        => '$1 true',
     '/^#(node.data:).+$/im'                          => '$1 true',
-    '/^#(node.name:).+$/im'                          => '$1 ' . $hostname,
+    '/^#(node.name:).+$/im'                          => '$1 ' . $hostinfo['hostname'],
     '/^#(index.number_of_shards:).+$/im'             => '$1 2',
     '/^#(index.number_of_replicas:).+$/im'           => '$1 2',
     '/^#(discovery.zen.minimum_master_nodes:).+$/im' => '$1 2',
