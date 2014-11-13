@@ -14,6 +14,9 @@ if (!$hostinfo = parseHostname($_REQUEST['hostname'])) {
     exit;
 }
 
+print_r($hostinfo);
+exit;
+
 // Load commands to build settings that are common to all servers in this family
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['family'] . '/' . $hostinfo['family'] . '.php'))) {
     $cmds[] = '# Config from "' . $build . '" loaded';
