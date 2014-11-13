@@ -22,4 +22,7 @@ foreach ($replace as $from => $to) {
 file_put_contents($file, $str);
 
 return [
+#    'systemctl daemon-reload',
+#    'systemctl enable elasticsearch service',
+#    'service elasticsearch start'
 ];
