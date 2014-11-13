@@ -5,24 +5,18 @@
 
 require dirname(dirname(__DIR__)) . '/create/repo/' . basename(__FILE__);  // create the repo
 
-if (is_dir('/etc/elasticsearch/')) {
-    if (file_exists('/etc/elasticsearch/elasticsearch.yml')) {
-        passthru('rm -f /etc/elasticsearch/elasticsearch.yml*', $cc);   // in case we get any .rpmnew issues on upgrade
-        passthru('yum reinstall elasticsearch -y', $cc);
-    }
-    else {
-        passthru('yum install elasticsearch -y', $cc);
-    }
-}
+passthru('rm -f /etc/elasticsearch/elasticsearch.yml*', $cc);   // in case we get any .rpmnew issues on upgrade
+passthru('yum remove elasticsearch -y', $cc);
+passthru('yum install elasticsearch -y', $cc);
 
 $replace = [
     '/^#cluster.name: elasticsearch/im' => 'cluster.name: es-' . $tier,
-    '/^#node.master: true/im' => 'node.master: false',
-    '/^#node.data: true/im' => 'node.master: false',
+    '/^#node.master: true/im'           => 'node.master: false',
+    '/^#node.data: true/im'             => 'node.master: false',
 ];
 
 $str = file_get_contents($file = '/etc/elasticsearch/elasticsearch.yml');
-foreach($replace as $from=>$to) {
+foreach ($replace as $from => $to) {
     $str = preg_replace($from, $to, $str, 1);   // only replace first occurrence
 }
 file_put_contents($file, $str);
