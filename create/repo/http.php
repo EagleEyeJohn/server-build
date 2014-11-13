@@ -67,4 +67,4 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 REPO;
 
-file_put_contents('/etc/yum.repos.d/elasticsearch.repo', $repo);
+file_put_contents('/etc/yum.repos.d/remi.repo', $repo);
