@@ -32,6 +32,6 @@ if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['fam
 
 $cmds = [
     'hostname',
-    'ip addr|grep -P "[\d.]{10,}"',
+    'ip addr show eth0 | grep inet | awk \'{ print $2; }\' | sed \'s/\/.*$//\'',
 ];
 runCommands($cmds);
