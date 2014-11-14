@@ -62,5 +62,5 @@ return [
     'systemctl enable httpd.service',
     'service httpd start',
     'sleep 10',
-    'curl -v localhost'
+    'curl -I localhost'
 ];
