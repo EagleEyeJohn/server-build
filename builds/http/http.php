@@ -56,7 +56,8 @@ runCommands(
 
 runCommands(
     [
-        'yum install -y ' . implode(' ', $php_extensions)
+        'yum install -y ' . implode(' ', $php_extensions),
+        'rm /var/www/vhost* -f',    # get rid of any existing virtual hosts
     ]
 );
 
