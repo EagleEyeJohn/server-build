@@ -22,5 +22,6 @@ foreach ($vhosts as $site => $settings) {
 </VirtualHost>
 VHOST;
 
-    file_put_contents('/etc/httpd/conf.d/vhost-' . ($key++) . '-' . strtolower($machine) . '.conf', $vhost);
+    $seq = str_pad($key++, 2, '0', STR_PAD_LEFT);
+    file_put_contents('/etc/httpd/conf.d/vhost-' . $seq . '-' . $site . '.conf', $vhost);
 }
