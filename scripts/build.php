@@ -22,6 +22,14 @@ if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['fam
     runCommands($cmds);
 }
 
+// Load commands to build settings that are specific to the cluster of the machine which invoked this script
+if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['family'] . '/' . $hostinfo['cluster'] . '.php'))) {
+    $cmds = [];
+    $cmds[] = '# Config from "' . $build . '" loaded';
+    $cmds   = array_merge($cmds, require $path);
+    runCommands($cmds);
+}
+
 // Load commands to build settings that are specific to the server which invoked this script
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['family'] . '/' . $hostinfo['machine'] . '.php'))) {
     $cmds = [];
