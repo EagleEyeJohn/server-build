@@ -5,6 +5,8 @@
 
 require dirname(dirname(__DIR__)) . '/create/repo/' . basename(__FILE__);  // create the repo
 
+require dirname(dirname(__DIR__)) . '/create/vhost/' . basename(__FILE__);  // create the vhost
+
 /*
 yum list installed|grep "\-pecl\-"
 
@@ -45,7 +47,8 @@ $php_extensions = [
 
 runCommands(
     [
-        'service firewalld stop',
+        'service firewalld stop',  // turn off firewall TODO: make this a permanent change
+        'setenforce 0',  // turn off SELinux. Haven't watched yet https://www.youtube.com/watch?v=MxjenQ31b70
         'yum install -y httpd',
         'yum install -y nodejs ruby npm',
     ]

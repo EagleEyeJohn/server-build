@@ -1,5 +1,8 @@
 <?php
-$basearch = '$basearch';  // undo the substitution that will take place, so copy/paste update of the contents is easier
+// undo the substitution that will take place below (so $basearch remains exactly that),
+// so it's easy to copy content from an existing '/etc/yum.repos.d/remi.repo' and pasted in here to update
+$basearch = '$basearch';
+
 
 $repo = <<<REPO
 [remi]
@@ -70,4 +73,3 @@ REPO;
 file_put_contents('/etc/yum.repos.d/remi.repo', $repo);
 
 copy('http://rpms.famillecollet.com/RPM-GPG-KEY-remi', '/etc/pki/rpm-gpg/RPM-GPG-KEY-remi');
-

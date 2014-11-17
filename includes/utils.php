@@ -4,6 +4,7 @@
  * AAAANNNN.tier.localdomain
  * AAAANNNN   = machine
  * AAAANN     = cluster
+ *     NN     = clusterno
  * AAAA       = family
  *       NN   = instance (unique within tier+family, not-enforced)
  *

@@ -3,7 +3,9 @@
  * An array of commands which are required for to all servers in the 'stor' family
  */
 
-require dirname(dirname(__DIR__)).'/create/vhost/'.basename(__FILE__);  // create the vhost
+require dirname(dirname(__DIR__)) . '/create/repo/' . basename(__FILE__);  // create the repo
+
+require dirname(dirname(__DIR__)) . '/create/vhost/' . basename(__FILE__);  // create the vhost
 
 return [
     /** Apache and PHP 5.4+ **/
