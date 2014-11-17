@@ -1,4 +1,6 @@
 <?php
+// MACHINE specific vhost
+
 $port = 80;
 
 $vhosts = [

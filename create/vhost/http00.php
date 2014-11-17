@@ -1,4 +1,6 @@
 <?php
+// CLUSTER specific vhost
+
 $port = 80;
 
 $vhosts = [

@@ -45,9 +45,14 @@ $php_extensions = [
 runCommands(
     [
         'service firewalld stop',  // turn off firewall TODO: make this a permanent change
-        'setenforce 0',  // turn off SELinux. Haven't watched yet https://www.youtube.com/watch?v=MxjenQ31b70
         'yum install -y httpd',
         'yum install -y nodejs ruby npm',
+        # For SELinux
+        #        'setenforce 0',  // turn off SELinux. Haven't watched yet https://www.youtube.com/watch?v=MxjenQ31b70
+        'yum install -y setroubleshoot setroubleshoot-server', # reboot or restart auditd after you install
+        'service auditd restart',
+        'setsebool -P httpd_read_user_content 1',
+        'setsebool -P httpd_enable_homedirs 1',
     ]
 );
 
