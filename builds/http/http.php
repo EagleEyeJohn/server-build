@@ -26,7 +26,6 @@ php-pecl-zip.x86_64                 1.12.4-1.el6.remi.5.5     @remi-php55
 
 $php_extensions = [
     'php-mysqlnd',
-    'php-tidy',
 
     'php-pecl-amqp',
     'php-pecl-gnupg',
