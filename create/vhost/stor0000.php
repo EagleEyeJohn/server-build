@@ -2,9 +2,7 @@
 $port = 80;
 
 $vhosts = [
-    'phoenix-reborn' => [],
-    'greggs'         => [],
-    'greggs-portal'  => [],
+    'server-build' => [],
 ];
 
 $key = 1;

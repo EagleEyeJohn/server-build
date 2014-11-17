@@ -1,8 +1,6 @@
 <?php
 $port = 80;
 
-/** @var string $machine */
-
 $vhost = <<<VHOST
 # default virtual host
 <VirtualHost *:{$port}>
