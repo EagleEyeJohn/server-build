@@ -60,11 +60,11 @@ runCommands(
 
 require dirname(dirname(__DIR__)) . '/create/vhost/' . basename(__FILE__);  // create the vhost
 
-if (file_exists($path = __DIR__ . '/' . $hostinfo['cluster'] . '.php')) {
+if (file_exists($path = dirname(dirname(__DIR__)) . '/create/vhost/' . $hostinfo['cluster'] . '.php')) {
     require $path;
 }
 
-if (file_exists($path = __DIR__ . '/' . $hostinfo['machine'] . '.php')) {
+if (file_exists($path = dirname(dirname(__DIR__)) . '/create/vhost/' . $hostinfo['machine'] . '.php')) {
     require $path;
 }
 
