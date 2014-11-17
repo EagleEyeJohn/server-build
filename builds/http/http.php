@@ -5,8 +5,6 @@
 
 require dirname(dirname(__DIR__)) . '/create/repo/' . basename(__FILE__);  // create the repo
 
-require dirname(dirname(__DIR__)) . '/create/vhost/' . basename(__FILE__);  // create the vhost
-
 /*
 yum list installed|grep "\-pecl\-"
 
@@ -60,6 +58,16 @@ runCommands(
         'rm /etc/httpd/conf.d/vhost* -f',    # get rid of any existing virtual hosts
     ]
 );
+
+require dirname(dirname(__DIR__)) . '/create/vhost/' . basename(__FILE__);  // create the vhost
+
+if (file_exists($path = __DIR__ . '/' . $hostinfo['cluster'] . '.php')) {
+    require $path;
+}
+
+if (file_exists($path = __DIR__ . '/' . $hostinfo['machine'] . '.php')) {
+    require $path;
+}
 
 return [
     'systemctl daemon-reload',
