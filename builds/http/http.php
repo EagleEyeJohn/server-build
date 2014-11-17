@@ -76,7 +76,8 @@ if (file_exists($path = dirname(dirname(__DIR__)) . '/create/vhost/' . $hostinfo
 return [
     'systemctl daemon-reload',
     'systemctl enable httpd.service',
-    'service httpd start',
+    'service httpd restart',
     'sleep 10',
-    'curl -I localhost'
+#    'curl -I localhost',
+    'curl localhost',
 ];
