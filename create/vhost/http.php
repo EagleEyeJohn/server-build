@@ -16,7 +16,7 @@ file_put_contents('/etc/httpd/conf.d/vhost-00-default.conf', $vhost);
 $em = (3 + strlen($hostname)) . 'em';
 
 file_put_contents(
-    '/var/www/index.html', <<<HTML
+    '/var/www/index.php', <<<HTML
 <?php
 \$build_date = date('Y-m-d H:i:s', filemtime(__FILE__));
 ?>
