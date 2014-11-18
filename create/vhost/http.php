@@ -13,6 +13,8 @@ VHOST;
 
 file_put_contents('/etc/httpd/conf.d/vhost-00-default.conf', $vhost);
 
+$em = strlen($hostname).'em';
+
 file_put_contents('/var/www/index.html', <<<HTML
 <html>
 <title>Server {$hostname}</title>
@@ -20,13 +22,21 @@ file_put_contents('/var/www/index.html', <<<HTML
 div{
   background: red;
   bottom: 0;
-  height: 10em;
+  height: 6em;
   left: 0;
   margin: auto;
   position: absolute;
   top: 0;
   right: 0;
-  width: 10em;
+  width: {$em};
+
+
+  border: 1px solid #AAAAAA;
+  text-align: center;
+  background-color: darkred;
+  color: white;
+  border-radius: 0.5em;
+  box-shadow: 0.25em 0.25em 0.12em #DDDDDD;
 }
 </style>
 <body>
