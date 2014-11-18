@@ -53,6 +53,8 @@ runCommands(
         'service auditd restart',
         'setsebool -P httpd_read_user_content 1',
         'setsebool -P httpd_enable_homedirs 1',
+        # get Composer
+        'curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer'
     ]
 );
 
@@ -60,6 +62,8 @@ runCommands(
     [
         'yum install -y ' . implode(' ', $php_extensions),
         'rm /etc/httpd/conf.d/vhost* -f',    # get rid of any existing virtual hosts
+        'cp ' . dirname(dirname(__DIR__)) . '/create/git/post-merge.sh /root/git-hooks-post-merge',
+        'chmod 0755 /root/git-hooks-post-merge',
     ]
 );
 
