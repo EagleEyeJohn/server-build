@@ -23,22 +23,22 @@ file_put_contents(
 <html>
 <title>Server {$hostname}</title>
 <style type="text/css">
-div{
-  bottom: 0;
-  height: 9em;
-  left: 0;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: {$em};
+div {
+    bottom: 0;
+    height: 8em;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: {$em};
 
-  border: 1px solid #AAAAAA;
-  text-align: center;
-  background-color: darkred;
-  color: white;
-  border-radius: 0.5em;
-  box-shadow: 0.25em 0.25em 0.12em #DDDDDD;
+    border: 1px solid #AAAAAA;
+    text-align: center;
+    background-color: darkred;
+    color: white;
+    border-radius: 0.5em;
+    box-shadow: 0.25em 0.25em 0.12em #DDDDDD;
 }
 </style>
 <body>
