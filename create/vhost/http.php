@@ -13,23 +13,27 @@ VHOST;
 
 file_put_contents('/etc/httpd/conf.d/vhost-00-default.conf', $vhost);
 
-$em = strlen($hostname).'em';
+$em = (3 + strlen($hostname)) . 'em';
 
-file_put_contents('/var/www/index.html', <<<HTML
+
+/** @noinspection PhpUndefinedVariableInspection */ // $build_date. PhpStorm is stupid
+file_put_contents(
+    '/var/www/index.html', <<<HTML
+<?php
+$build_date = date('Y-m-d H:i:s', filemtime(__FILE__));
+?>
 <html>
 <title>Server {$hostname}</title>
 <style type="text/css">
 div{
-  background: red;
   bottom: 0;
-  height: 6em;
+  height: 9em;
   left: 0;
   margin: auto;
   position: absolute;
   top: 0;
   right: 0;
   width: {$em};
-
 
   border: 1px solid #AAAAAA;
   text-align: center;
@@ -42,6 +46,7 @@ div{
 <body>
 <div>
 <h1>{$hostname}</h1>
+<p>Build date: <?=$build_date?></p>
 </div>
 </body>
 </html>
