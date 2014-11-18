@@ -50,9 +50,9 @@ VHOST;
     $cmds   = [];
     $cmds[] = 'cd /var/www';
     $cmds[] = 'rm -rf ' . $document_root;
-    $cmds[] = 'git clone ' . $settings['github'];
+    $cmds[] = 'git clone ' . $settings['github'] . ' ' . $document_root;
     $cmds[] = 'ln -s /root/git-hooks-post-merge ' . $document_root . '/.git/hooks/post-merge';
-    $cmds[] = 'chown -r ' . $user . ':' . $user . ' ' . $user;
+    $cmds[] = 'chown -R ' . $user . ':' . $user . ' ' . $user;
     runCommands($cmds);
 exit;
 }
