@@ -15,12 +15,10 @@ file_put_contents('/etc/httpd/conf.d/vhost-00-default.conf', $vhost);
 
 $em = (3 + strlen($hostname)) . 'em';
 
-
-/** @noinspection PhpUndefinedVariableInspection */ // $build_date. PhpStorm is stupid
 file_put_contents(
     '/var/www/index.html', <<<HTML
 <?php
-$build_date = date('Y-m-d H:i:s', filemtime(__FILE__));
+\$build_date = date('Y-m-d H:i:s', filemtime(__FILE__));
 ?>
 <html>
 <title>Server {$hostname}</title>

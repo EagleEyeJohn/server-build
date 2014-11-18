@@ -41,21 +41,23 @@ if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['fam
 // Load commands to build SSH certificate login details for Eagle Eye staff
 $cmds = [];
 try {
-    $dir  = new DirectoryIterator(dirname(__DIR__) . '/ssh-keys');
+    $dir = new DirectoryIterator(dirname(__DIR__) . '/ssh-keys');
     foreach ($dir as $file_info) {
         if (!$file_info->isDot()) {
             $user   = basename($file_info->getFilename(), '.pub');
             $cmds[] = 'useradd ' . $user;
             $cmds[] = 'mkdir ' . ($path = '/home/' . $user . '/.ssh');
             $cmds[] = 'chmod 0700 ' . $path;
+            $cmds[] = 'chown ' . $user . ':' . $user . ' ' . $path;
             $cmds[] = 'cat ' . escapeshellarg($file_info->getPathname()) . ' > ' . ($path = '/home/' . $user . '/.ssh/authorized_keys');
             $cmds[] = 'chmod 0600 ' . $path;
+            $cmds[] = 'chown ' . $user . ':' . $user . ' ' . $path;
         }
     }
     runCommands($cmds);
 }
 catch (\Exception $e) {
-    $cmds[] = 'echo -e "' . COL_BLACK . COL_BG_RED . 'SSH KEY ERROR : "' .$e->getMessage() . COL_RESET . '"';
+    $cmds[] = 'echo -e "' . COL_BLACK . COL_BG_RED . 'SSH KEY ERROR : "' . $e->getMessage() . COL_RESET . '"';
 }
 
 $cmds = [
