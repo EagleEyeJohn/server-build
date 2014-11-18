@@ -16,7 +16,7 @@ if (!$hostinfo = parseHostname($hostname)) {
 
 // Load commands to build settings that are common to all servers in this family
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['family'] . '/' . $hostinfo['family'] . '.php'))) {
-    $cmds = [];
+    $cmds   = [];
     $cmds[] = '# Config from "' . $build . '" loaded';
     $cmds   = array_merge($cmds, require $path);
     runCommands($cmds);
@@ -24,7 +24,7 @@ if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['fam
 
 // Load commands to build settings that are specific to the cluster of the machine which invoked this script
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['family'] . '/' . $hostinfo['cluster'] . '.php'))) {
-    $cmds = [];
+    $cmds   = [];
     $cmds[] = '# Config from "' . $build . '" loaded';
     $cmds   = array_merge($cmds, require $path);
     runCommands($cmds);
@@ -32,10 +32,29 @@ if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['fam
 
 // Load commands to build settings that are specific to the server which invoked this script
 if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['family'] . '/' . $hostinfo['machine'] . '.php'))) {
-    $cmds = [];
+    $cmds   = [];
     $cmds[] = '# Config from "' . $build . '" loaded';
     $cmds   = array_merge($cmds, require $path);
     runCommands($cmds);
+}
+
+// Load commands to build SSH certificate login details for Eagle Eye staff
+try {
+    $cmds = [];
+    $dir  = new DirectoryIterator(dirname(__DIR__) . 'ssh-keys');
+    foreach ($dir as $file_info) {
+        if (!$file_info->isDot()) {
+            $user   = $file_info->getFilename();
+            $cmds[] = 'useradd ' . $user;
+            $cmds[] = 'mkdir ' . ($path = '/home/' . $user . '/.ssh');
+            $cmds[] = 'chmod 0700 ' . $path;
+            $cmds[] = 'cat ' . escapeshellarg($file_info->getPathname()) . ' > ' . ($path = '/home/' . $user . '/.ssh/authorized_keys');
+            $cmds[] = 'chmod 0600 ' . $path;
+        }
+    }
+    runCommands($cmds);
+}
+catch (\Exception $e) {
 }
 
 $cmds = [
