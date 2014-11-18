@@ -50,4 +50,3 @@ div {
 </html>
 HTML
 );
-exit;

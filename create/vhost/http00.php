@@ -12,6 +12,17 @@ $vhosts = [
 $key = 1;
 
 foreach ($vhosts as $site => $settings) {
+    if (empty($settings['github'])) {
+        $settings['github'] = 'https://github.com/Eagle-Eye-Solutions/' . $site . '.git';
+    }
+
+    $cmds = [];
+    $cmds[] = 'useradd ' . $site;
+    $cmds[] = 'echo "eagle" | passwd ' . $site . ' --stdin';
+    runCommands($cmds);
+
+    setComposerConfig($site);
+
     $vhost = <<<VHOST
 <VirtualHost *:$port>
     DocumentRoot /var/www/$site
