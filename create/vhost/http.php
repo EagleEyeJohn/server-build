@@ -44,7 +44,7 @@ div{
 <body>
 <div>
 <h1>{$hostname}</h1>
-<p>Build date: <?=$build_date?></p>
+<p>Build date: <?=\$build_date?></p>
 </div>
 </body>
 </html>
