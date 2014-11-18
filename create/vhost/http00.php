@@ -4,14 +4,16 @@
 $port = 80;
 
 $vhosts = [
- #   'phoenix-reborn'         => [],
- #   'golden-eagle'           => [],
-    'golden-rifleman'        => ['github' => 'https://github.com/Eagle-Eye-Solutions/rifleman.git'],
- #   'hercules'               => [],
- #   'continuous-integration' => [],
- #   'hermes'                 => [],
- #   'consumers'              => [],
- #   'medusa'                 => [],
+    #   'phoenix-reborn'         => [],
+    #   'golden-eagle'           => [],
+    'golden-rifleman' => [
+        'github' => 'https://' . GITHUB_TOKEN . ':x-oauth-basic@github.com/Eagle-Eye-Solutions/rifleman.git'
+    ],
+    #   'hercules'               => [],
+    #   'continuous-integration' => [],
+    #   'hermes'                 => [],
+    #   'consumers'              => [],
+    #   'medusa'                 => [],
 ];
 
 ksort($vhosts);
@@ -19,10 +21,10 @@ ksort($vhosts);
 $key = 1;
 
 foreach ($vhosts as $user => $settings) {
-    $document_root = '/var/www/'.$user;
+    $document_root = '/var/www/' . $user;
 
     if (empty($settings['github'])) {
-        $settings['github'] = 'https://github.com/Eagle-Eye-Solutions/' . $user . '.git';
+        $settings['github'] = 'https://' . GITHUB_TOKEN . ':x-oauth-basic@github.com/Eagle-Eye-Solutions/' . $user . '.git';
     }
 
     $cmds   = [];
@@ -52,7 +54,7 @@ VHOST;
     $cmds[] = 'rm -rf ' . $document_root;
     $cmds[] = 'git clone ' . $settings['github'] . ' ' . $document_root;
     $cmds[] = 'ln -s /root/git-hooks-post-merge ' . $document_root . '/.git/hooks/post-merge';
-    $cmds[] = 'chown -R ' . $user . ':' . $user . ' ' . $user;
+    $cmds[] = 'chown -R ' . $user . ':' . $user . ' ' . $document_root;
     runCommands($cmds);
-exit;
+    exit;
 }
