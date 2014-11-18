@@ -41,7 +41,7 @@ if (file_exists($path = dirname(__DIR__) . ($build = '/builds/' . $hostinfo['fam
 // Load commands to build SSH certificate login details for Eagle Eye staff
 try {
     $cmds = [];
-    $dir  = new DirectoryIterator(dirname(__DIR__) . 'ssh-keys');
+    $dir  = new DirectoryIterator(dirname(__DIR__) . '/ssh-keys');
     foreach ($dir as $file_info) {
         if (!$file_info->isDot()) {
             $user   = $file_info->getFilename();
@@ -55,6 +55,7 @@ try {
     runCommands($cmds);
 }
 catch (\Exception $e) {
+    $cmds = '# NO SSH KEYS';
 }
 
 $cmds = [
